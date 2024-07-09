@@ -23,8 +23,6 @@ class BasePage extends StatefulWidget {
 
 class _BasePageState extends State<BasePage> with TickerProviderStateMixin {
   late AnimationController _fadeOutTransition;
-  late Animation<Offset> _slide;
-  late Animation<double> _fade;
 
   List<Widget> pages = [];
 

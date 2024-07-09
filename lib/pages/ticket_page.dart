@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -18,16 +20,18 @@ class TicketPage extends StatefulWidget {
 class _TicketPageState extends State<TicketPage> {
   @override
   Widget build(BuildContext context) {
+    final rand = Random().nextInt(usersList.length);
+
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  'https://images.pexels.com/photos/17461673/pexels-photo-17461673/free-photo-of-female-dj-wearing-headphones-at-the-club.jpeg?auto=compress&cs=tinysrgb&w=600',
-                ),
+                    // 'https://images.pexels.com/photos/17461673/pexels-photo-17461673/free-photo-of-female-dj-wearing-headphones-at-the-club.jpeg?auto=compress&cs=tinysrgb&w=600',
+                    usersList[rand].imageUrl),
               ),
             ),
           ),
@@ -53,10 +57,10 @@ class _TicketPageState extends State<TicketPage> {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 275,
             right: 20,
-            child: AnimatedCenterBox(),
+            child: AnimatedCenterBox(index: rand),
           ),
         ],
       ),
@@ -231,7 +235,9 @@ class _BuyTicketColumnState extends State<BuyTicketColumn>
 class AnimatedCenterBox extends StatefulWidget {
   const AnimatedCenterBox({
     super.key,
+    required this.index,
   });
+  final int index;
 
   @override
   State<AnimatedCenterBox> createState() => _AnimatedCenterBoxState();
@@ -306,10 +312,10 @@ class _AnimatedCenterBoxState extends State<AnimatedCenterBox>
               children: [
                 FadeTransition(
                   opacity: _fade,
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                       radius: 25,
                       backgroundImage: NetworkImage(
-                        'https://images.pexels.com/photos/8141168/pexels-photo-8141168.jpeg?auto=compress&cs=tinysrgb&w=200',
+                        usersList[widget.index].imageUrl,
                       )),
                 ),
                 Text(

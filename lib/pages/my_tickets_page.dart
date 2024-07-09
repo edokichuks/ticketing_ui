@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ticketing_ui/constants.dart';
 import 'package:ticketing_ui/pages/home_page.dart';
 import 'package:ticketing_ui/widgets/scale_fade_transition.dart';
@@ -22,7 +20,6 @@ class MyTicketsPage extends StatefulWidget {
 class _MyTicketsPageState extends State<MyTicketsPage>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
-  late AnimationController _fadeOutTransition;
   late Animation<Offset> _slide;
   late Animation<Offset> _containerSlide;
   late Animation<double> _fade;
@@ -181,7 +178,7 @@ class _TicketsBottomContainerState extends State<TicketsBottomContainer>
             ),
             const SizedBox(height: 24),
             ...List.generate(
-              4,
+              usersList.length,
               (index) => QueueItem(index: index),
             ),
             const SizedBox(height: 100),
@@ -261,7 +258,7 @@ class _TicketListViewState extends State<TicketListView>
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
           child: Row(
             children: List.generate(
-              3,
+              4,
               (index) => TicketWidget(
                 sizeAnimation: _size,
               ),
@@ -334,10 +331,10 @@ class _QueueItemState extends State<QueueItem> with TickerProviderStateMixin {
             children: [
               SizeTransition(
                 sizeFactor: _size,
-                child: const CircleAvatar(
+                child: CircleAvatar(
                     radius: 25,
                     backgroundImage: NetworkImage(
-                      'https://images.pexels.com/photos/8141168/pexels-photo-8141168.jpeg?auto=compress&cs=tinysrgb&w=200',
+                      usersList[widget.index].imageUrl,
                     )),
               ),
               const SizedBox(width: 12),
@@ -347,7 +344,7 @@ class _QueueItemState extends State<QueueItem> with TickerProviderStateMixin {
                   SlideFadeTransition(
                     animation: _fade,
                     child: Text(
-                      'Margaret Baker',
+                      usersList[widget.index].name,
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
@@ -357,7 +354,7 @@ class _QueueItemState extends State<QueueItem> with TickerProviderStateMixin {
                   SlideFadeTransition(
                     animation: _fade,
                     child: Text(
-                      '115 place in the queue',
+                      usersList[widget.index].caption,
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium

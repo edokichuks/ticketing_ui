@@ -1,10 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ticketing_ui/constants.dart';
-import 'package:ticketing_ui/pages/base_page.dart';
 import 'package:ticketing_ui/pages/ticket_page.dart';
 import 'package:ticketing_ui/widgets/fade_transition.dart';
 import 'package:uicons/uicons.dart';
